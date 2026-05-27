@@ -91,10 +91,15 @@ app.post('/api/draft-reply', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  const provider = pickProvider();
-  console.log(`✅ 중계 서버 실행: http://localhost:${PORT}`);
-  console.log(provider
-    ? `   공급자: ${provider} (${provider === 'openai' ? OPENAI_MODEL : ANTHROPIC_MODEL})`
-    : '   ⚠️  API 키가 없습니다 — .env에 OPENAI_API_KEY 또는 ANTHROPIC_API_KEY를 입력하세요.');
-});
+// 로컬 실행 시에만 listen. Vercel 서버리스에서는 app을 export해 핸들러로 사용.
+if (require.main === module) {
+  app.listen(PORT, () => {
+    const provider = pickProvider();
+    console.log(`✅ 중계 서버 실행: http://localhost:${PORT}`);
+    console.log(provider
+      ? `   공급자: ${provider} (${provider === 'openai' ? OPENAI_MODEL : ANTHROPIC_MODEL})`
+      : '   ⚠️  API 키가 없습니다 — OPENAI_API_KEY 또는 ANTHROPIC_API_KEY를 설정하세요.');
+  });
+}
+
+module.exports = app;
