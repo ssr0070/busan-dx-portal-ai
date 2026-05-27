@@ -1,0 +1,16 @@
+{
+  "name": "busan-dx-portal-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BIPA 문의 포털 — AI 자동 답변 초안 중계 서버",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.98.1",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "openai": "^6.39.0"
+  }
+}
